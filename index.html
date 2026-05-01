@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiket Tambahan Sheila On 7 Bali</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f4f1ef;
+      color:#111;
+      overflow-x:hidden;
+    }
+
+    .bg-grid{
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.09) 1px, transparent 1px);
+      background-size:38px 38px;
+      z-index:-2;
+    }
+
+    .floating-shape{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(60px);
+      opacity:.18;
+      z-index:-1;
+    }
+
+    .shape1{
+      width:300px;
+      height:300px;
+      background:linear-gradient(135deg,#ff5a36,#ff7b54);
+      top:-100px;
+      right:-100px;
+    }
+
+    .shape2{
+      width:250px;
+      height:250px;
+      background:linear-gradient(135deg,#3ecf4c,#5ee36b);
+      bottom:-80px;
+      left:-80px;
+    }
+
+    .container{
+      width:92%;
+      max-width:1200px;
+      margin:auto;
+      padding:30px 0 70px;
+    }
+
+    .hero{
+      background-image: linear-gradient(to bottom right, rgba(255,255,255,0.92), rgba(255,255,255,0.82));
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(255,255,255,0.88);
+      backdrop-filter:blur(15px);
+      border-radius:28px;
+      padding:40px 30px;
+      border:2px solid rgba(0,0,0,0.05);
+      box-shadow:0 20px 50px rgba(0,0,0,0.08);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .badge{
+      border:3px solid #000;
+      display:inline-block;
+      background:linear-gradient(135deg,#47d147,#6cf56c);
+      color:white;
+      padding:10px 18px;
+      border-radius:28px;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:22px;
+      letter-spacing:1px;
+      box-shadow:0 8px 25px rgba(71,209,71,0.3);
+    }
+
+    .hero h1{
+      text-transform:none;
+      font-size:72px;
+      line-height:1;
+      font-weight:800;
+      margin-bottom:18px;
+      color:#ff5a36;
+      text-shadow:3px 3px 0px rgba(0,0,0,0.18);
+      letter-spacing:-2px;
+    }
+
+    .hero p{
+      font-weight:500;
+      font-size:17px;
+      color:#555;
+      max-width:760px;
+      line-height:1.8;
+      margin-bottom:35px;
+    }
+
+    .countdown-box{
+      border:1px solid rgba(0,0,0,0.08);
+      background:linear-gradient(135deg,#111827,#0f172a);
+      color:white;
+      border-radius:28px;
+      padding:30px;
+      margin-top:20px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .countdown-box::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(255,90,54,0.18), rgba(71,209,71,0.15));
+    }
+
+    .countdown-content{
+      position:relative;
+      z-index:2;
+    }
+
+    .countdown-title{
+      font-size:18px;
+      margin-bottom:20px;
+      color:#ddd;
+    }
+
+    .countdown{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .time-box{
+      border:3px solid #000;
+      flex:1;
+      min-width:90px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      padding:22px;
+      border-radius:28px;
+      text-align:center;
+    }
+
+    .time-box h2{
+      font-size:40px;
+      color:#ffe600;
+      margin-bottom:6px;
+    }
+
+    .time-box span{
+      color:#aaa;
+      font-size:13px;
+      letter-spacing:1px;
+    }
+
+    .section-title{
+      margin:60px 0 25px;
+      font-size:36px;
+      font-weight:800;
+      color:#111;
+    }
+
+    .ticket-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:25px;
+    }
+
+    .ticket-card{
+      backdrop-filter: blur(18px);
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(255,255,255,0.82);
+      backdrop-filter:blur(12px);
+      border-radius:28px;
+      padding:28px;
+      border:2px solid rgba(0,0,0,0.05);
+      transition:.35s;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 15px 35px rgba(0,0,0,0.07);
+    }
+
+    .ticket-card:hover{
+      transform:translateY(-10px) scale(1.01);
+      box-shadow:0 25px 45px rgba(0,0,0,0.12);
+    }
+
+    .ticket-card h3{
+      font-size:28px;
+      margin-bottom:12px;
+    }
+
+    .premium h3{
+      color:#ff5a36;
+    }
+
+    .fast h3{
+      color:#47d147;
+    }
+
+    .festival h3{
+      color:#888;
+    }
+
+    .price{
+      font-size:52px;
+      font-weight:800;
+      margin-bottom:18px;
+    }
+
+    .stock{
+      display:inline-block;
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:22px;
+    }
+
+    .premium .stock{
+      background:rgba(255,90,54,0.15);
+      color:#ff5a36;
+    }
+
+    .fast .stock{
+      background:rgba(71,209,71,0.15);
+      color:#16a34a;
+    }
+
+    .festival .stock{
+      background:#111;
+      color:white;
+    }
+
+    .ticket-card button{
+      letter-spacing:.5px;
+      border:3px solid #000;
+      width:100%;
+      padding:16px;
+      border:none;
+      border-radius:28px;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      transition:.3s;
+    }
+
+    .premium button{
+      background:linear-gradient(135deg,#ff5a36,#ff7b54);
+      color:white;
+    }
+
+    .fast button{
+      background:#47d147;
+      color:white;
+    }
+
+    .festival button{
+      background:linear-gradient(135deg,#d1d5db,#9ca3af);
+      color:#666;
+      cursor:not-allowed;
+    }
+
+    .lineup-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:24px;
+      margin-top:25px;
+    }
+
+    .lineup-card{
+      border:1px solid rgba(0,0,0,0.08);
+      overflow:hidden;
+      border-radius:28px;
+      background:white;
+      border:2px solid rgba(0,0,0,0.05);
+      box-shadow:0 15px 30px rgba(0,0,0,0.08);
+    }
+
+    .lineup-card img{
+      transition:.4s;
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      display:block;
+      filter:contrast(1.03) saturate(1.05);
+    }
+
+    .lineup-card .caption{
+      padding:18px;
+      font-size:15px;
+      font-weight:700;
+    }
+
+    footer{
+      margin-top:80px;
+      text-align:center;
+      padding:35px 20px;
+      border-top:2px dashed rgba(0,0,0,0.1);
+    }
+
+    footer h2{
+      color:#ff5a36;
+      font-size:34px;
+      text-shadow:3px 3px 0px #000;
+      margin-bottom:10px;
+    }
+
+    footer p{
+      color:#666;
+      font-size:15px;
+      letter-spacing:1px;
+    }
+
+    @media(max-width:768px){
+      .hero h1{
+        font-size:46px;
+      }
+
+      .section-title{
+        font-size:28px;
+      }
+
+      .countdown{
+        gap:12px;
+      }
+
+      .time-box h2{
+        font-size:30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="floating-shape shape1"></div>
+<div class="floating-shape shape2"></div>
+
+<div class="container">
+
+  <div style="margin-bottom:28px; overflow:hidden; border-radius:32px; box-shadow:0 20px 45px rgba(0,0,0,0.12); border:1px solid rgba(0,0,0,0.08); background:white;">
+    <img src="SRC.BANNER" alt="Banner Event" style="width:100%; display:block; object-fit:cover; max-height:480px;">
+  </div>
+
+  <section class="hero">
+    <div class="badge">TIKET TAMBAHAN RESMI • SHEILA ON 7 BALI</div>
+
+    <h1>Sheila On 7<br>Bali Experience</h1>
+
+    <p>
+      Antusiasme luar biasa dari para penonton membuat tiket utama terjual sangat cepat. Untuk memberikan kesempatan tambahan kepada penggemar, kini tersedia limited additional ticket dengan akses kategori pilihan dan sistem pemesanan prioritas eksklusif.
+    </p>
+
+    <div class="countdown-box">
+      <div class="countdown-content">
+        <div class="countdown-title">
+          LIMITED ADDITIONAL ACCESS
+          ⏳ Countdown Pembukaan Tiket Tambahan
+        </div>
+
+        <div class="countdown">
+          <div class="time-box">
+            <h2 id="days">00</h2>
+            <span>HARI</span>
+          </div>
+
+          <div class="time-box">
+            <h2 id="hours">00</h2>
+            <span>JAM</span>
+          </div>
+
+          <div class="time-box">
+            <h2 id="minutes">00</h2>
+            <span>MENIT</span>
+          </div>
+
+          <div class="time-box">
+            <h2 id="seconds">00</h2>
+            <span>DETIK</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <h2 class="section-title">🎟️ Exclusive Ticket Category</h2>
+
+  <div class="ticket-grid">
+
+    <div class="ticket-card premium">
+      <h3>PREMIUM</h3>
+      <div class="price">Rp. 400.000</div>
+      <div class="stock">🎟️ Tersisa 10 Tiket</div>
+      <button onclick="window.location.href='https://soekarnofestrun2026-rgb.github.io/Bali-United-training-center/'">
+        Beli Sekarang
+      </button>
+    </div>
+
+    <div class="ticket-card fast">
+      <h3>FAST TRACK</h3>
+      <div class="price">Rp. 600.000</div>
+      <div class="stock">⚡ Tersisa 15 Tiket</div>
+      <button onclick="window.location.href='https://soekarnofestrun2026-rgb.github.io/Bali-United-training-center/'">
+        Ambil Akses
+      </button>
+    </div>
+
+    <div class="ticket-card festival">
+      <h3>FESTIVAL</h3>
+      <div class="price">Sold Out</div>
+      <div class="stock">❌ Tiket Habis</div>
+      <button>
+        Fully Booked
+      </button>
+    </div>
+
+  </div>
+
+
+  <h2 class="section-title">🎤 Line Up</h2>
+
+  <div class="lineup-grid">
+
+    <div class="lineup-card">
+      <img src="IMAGE1.jpg" alt="Lineup 1">
+      <div class="caption">Sheila On 7 Main Stage</div>
+    </div>
+
+    <div class="lineup-card">
+      <img src="IMAGE2.jpg" alt="Lineup 2">
+      <div class="caption">Special Performance Guest</div>
+    </div>
+
+    <div class="lineup-card">
+      <img src="IMAGE3.jpg" alt="Lineup 3">
+      <div class="caption">Exclusive Festival Experience</div>
+    </div>
+
+  </div>
+
+
+  <footer>
+    <h2>POLIPONI ID</h2>
+    <p>Si paling konser 2026 • Official Experience Platform</p>
+  </footer>
+
+</div>
+
+<script>
+
+  const targetDate = new Date();
+  targetDate.setHours(targetDate.getHours() + 18);
+
+  function updateCountdown(){
+
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById('days').innerHTML = days;
+    document.getElementById('hours').innerHTML = hours;
+    document.getElementById('minutes').innerHTML = minutes;
+    document.getElementById('seconds').innerHTML = seconds;
+  }
+
+  setInterval(updateCountdown,1000);
+  updateCountdown();
+
+</script>
+
+</body>
+</html>
